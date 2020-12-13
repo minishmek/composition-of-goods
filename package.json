@@ -1,0 +1,35 @@
+{
+  "name": "compositionofgoods",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix client",
+    "server": "nodemon app.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kondratykdenys/compositionOfGoods.git"
+  },
+  "author": "Denys Kondratyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kondratykdenys/compositionOfGoods/issues"
+  },
+  "homepage": "https://github.com/kondratykdenys/compositionOfGoods#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "react-moment": "^1.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
