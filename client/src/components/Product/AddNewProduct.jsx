@@ -46,7 +46,7 @@ function AddNewProduct() {
           <input type="text" placeholder="Назва" id="name" value={form.name || ''}
                  onChange={setFormField} required/>
           <label htmlFor="price">Ціна</label>
-          <input type="number" id="price" placeholder="Ціна" min="0" value={form.price || ''}
+          <input type="number" id="price" placeholder="Ціна" min="1" value={form.price || ''}
                  onChange={setFormField} required/>
           <button type="submit">Додати</button>
         </form>

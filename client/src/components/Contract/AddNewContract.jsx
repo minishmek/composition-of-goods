@@ -81,7 +81,7 @@ function AddNewContract() {
           </select>
           <label htmlFor="count">Кількість</label>
           <input type="number" placeholder="Кількість" id="count" value={form.count || ''}
-                 onChange={setFormField} required/>
+                 onChange={setFormField} required min='0'/>
           <button type="submit">Додати</button>
         </form>
       )
