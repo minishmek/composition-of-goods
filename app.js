@@ -2,12 +2,11 @@ const mysql = require('mysql2');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {mysqlConfig, secretKey} = require('./config');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 
 const app = express();
 app.use(bodyParser.json())
-app.use(express.static('public'));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "*");
   res.header('Access-Control-Allow-Methods', '*');
@@ -65,11 +64,12 @@ function start() {
     let query = `SELECT * FROM ${nameTable}`;
 
     if (nameTable === 'contract') {
-      query = 'select contract.id as id, clients.name as user, dataOfAssebly, product.name as product, countOfProduct, containers.name as container from contract inner join clients inner join product inner join containers on contract.user = clients.id and contract.typeOfProduct = product.id and contract.container = containers.id;'
+      query = 'select contract.id as id, buyer.name as buyer, buyer.lastName as buyerLastName, cont_date, product.name as product, count from contract inner join buyer inner join product on contract.id_buyer = buyer.id and product.id = contract.product;'
     }
 
     conn.query(query, (err, rows) => {
       if (err) {
+
         res.send(err);
       } else {
         res.send(rows);
@@ -95,7 +95,7 @@ function start() {
   const getAllUsers = (req, res) => {
     conn.query('select id, name, lastName, email from users;', (err, rows) => {
       if (err) {
-        res.status(400).json(err);
+        res.status(400).json(err.message);
       }
       else {
         res.status(200).json(rows);
@@ -114,10 +114,8 @@ function start() {
         res.status(400).json({message: `Користувач з таким емейлом вже існує`});
       }
       else {
-        const salt = bcrypt.genSaltSync(15);
         const {email, password, lastName, name} = req.body;
-        const pass = bcrypt.hashSync(password, salt);
-        conn.query(`insert into users(name, lastName, email, password) values('${name}', '${lastName}', '${email}', '${pass}');`, (err, rows) => {
+        conn.query(`insert into users(name, lastName, email, password) values('${name}', '${lastName}', '${email}', '${password}');`, (err, rows) => {
           if (err) {
             res.status(400).json({message: err.message});
           }
@@ -141,8 +139,7 @@ function start() {
       else {
         const {password} = req.body;
         rows.map(row => {
-          const invalidPass = bcrypt.compareSync(password, row.password);
-          if (invalidPass) {
+          if (password === row.password) {
             const token = jwt.sign({
               id: row.id,
               email: row.email,
@@ -151,9 +148,8 @@ function start() {
 
             return res.status(200).json({message: 'Ok', token: `Bearer ${token}`});
           }
-          else  {
-            return res.status(400).json({message: 'Невірний пароль'});
-          }
+
+          return res.status(400).json({message: 'Невірний пароль'});
         })
       }
     });
@@ -163,3 +159,11 @@ function start() {
 }
 
 start();
+
+if ((process.env.NODE_ENV = "production")) {
+  app.use(express.static("client/build"))
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"))
+  })
+}

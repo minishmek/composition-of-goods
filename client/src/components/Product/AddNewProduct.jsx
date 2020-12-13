@@ -12,7 +12,7 @@ function AddNewProduct() {
 
   const AddNewProduct = e => {
     e.preventDefault();
-    axios.post('add-product', form).then(res => {
+    axios.post('add/product', form).then(res => {
       history.go(0)
     }).catch(e => {
       console.log(e.request)

@@ -12,7 +12,7 @@ function AddNewClient() {
 
   const AddNewClient = e => {
     e.preventDefault();
-    axios.post('add/clients', form).then(res => {
+    axios.post('add/buyer', form).then(res => {
       history.go(0);
     }).catch(e => {
       console.log(e.request)

@@ -5,17 +5,16 @@ import services from '../../services';
 
 function AllProduct() {
 
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
   const [error, setError] = useState(null);
-  const databaseName = 'product'
 
   useEffect(() => {
-    services.getAll(databaseName, setProducts, setError);
+    services.getAll('product', setProduct, setError);
   }, [])
 
   const removeProduct = (id) => {
     axios.delete(`remove/product/${id}`,).then(res => {
-      services.getAll(databaseName, setProducts, setError);
+      services.getAll('product', setProduct, setError);
     }).catch(e => {
       console.log(setError(e.message))
     })
@@ -30,15 +29,17 @@ function AllProduct() {
         </ul>
         <ul className={styles.productList}>
           {
-            products.map(product => {
-              return (<li key={product.id}>
+            product.length ?
+            product.map(product => {
+              return (
+                <li key={product.id}>
                 <span>{product.name}</span>
                 <span>
                   {product.price}
                   <a className={styles.removeProduct} onClick={e => removeProduct(product.id)}>&times;</a>
                 </span>
               </li>)
-            })
+            }) : <h1>Поки що немає продуктів</h1>
           }
         </ul>
       </div>

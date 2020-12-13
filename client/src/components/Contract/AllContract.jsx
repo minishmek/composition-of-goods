@@ -16,23 +16,26 @@ function AllContract() {
     (
       <div>
         <ul className={styles.head}>
+          <li>Код</li>
           <li>Клієнт</li>
           <li>Дата заключення договору</li>
-          <li>Тип продукту</li>
-          <li>Кількість продуктів</li>
-          <li>Тара</li>
+          <li>Продукт</li>
+          <li>Кількість</li>
         </ul>
         <ul className={styles.contractList}>
           {
+            contracts.length ?
             contracts.map(contract => {
               return (<li key={contract.id}>
-                <span>{contract.user}</span>
-                <span>{Moment(contract.dataOfAssebly).format('DD-MM-YYYY')}</span>
+                <span>{contract.id}</span>
+                <span>{contract.buyer} {contract.buyerLastName}</span>
+                <span>{Moment(contract.cont_date).format('DD-MM-YYYY')}</span>
                 <span>{contract.product}</span>
-                <span>{contract.countOfProduct}</span>
-                <span>{contract.container}</span>
+                <span>{contract.count}</span>
               </li>)
             })
+              :
+              <h1>Поки що немає контрактів</h1>
           }
         </ul>
       </div>

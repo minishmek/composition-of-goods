@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-around;
   padding: 20px 0;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #484848;
 }
 
 .clientList {
@@ -19,7 +19,7 @@
     }
 
     &:hover {
-      background-color: darken(#c4c4c4, 0.5);
+      background-color: darken(#b5b5b5, 0.5);
     }
   }
 
@@ -49,7 +49,7 @@
 
   button {
     padding: 20px;
-    background: #e35959;
+    background: #fff991;
     transition: .5s;
     border: none;
     border-radius: 30px;
@@ -59,19 +59,18 @@
     display: inline-block;
 
     &:hover {
-      background: #a90000;
+      background: #d0ffa9;
       color: #fff;
     }
   }
 }
 
 .newClient {
-  margin: 20px 0;
-  padding: 20px;
+  margin: 10px 0;
+  padding: 10px;
   border: none;
-  border-radius: 30px;
-  background-color: #3c4b81;
-  color: #fff;
+  background-color: #d3ddff;
+  color: #000000;
   outline: none;
   cursor: pointer;
 }

@@ -19,9 +19,8 @@ const Header = () => {
                     <li><NavLink to="/">Домашня сторінка</NavLink></li>
                     <li><NavLink to="/client">Клієнти</NavLink></li>
                     <li><NavLink to="/contract">Контракти</NavLink></li>
-                    <li><NavLink to="/ttn">Товарні накладні</NavLink></li>
                     <li><NavLink to="/product">Товари</NavLink></li>
-                    <li><NavLink to="/container">Тара</NavLink></li>
+                    <li><NavLink to="/ttn">Товарні накладні</NavLink></li>
                     <li><a onClick={logout}>Вийти</a></li>
                 </ul>
             </nav>

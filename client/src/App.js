@@ -8,8 +8,6 @@ function App() {
     return localStorage.getItem('login')
   }
 
-  console.log(!login())
-
   return (
     <div className="App">
       {

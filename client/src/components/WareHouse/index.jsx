@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Contract from "../Contract/Contract";
 import Product from "../Product/Product";
 import Client from "../Client/Client";
-import Container from "../Container/Container";
+import TTN from "../TTN/TTN";
 
 function Index() {
   return (
@@ -16,7 +16,7 @@ function Index() {
       <Route path="/contract" component={Contract}/>
       <Route path="/product" component={Product}/>
       <Route path="/client" component={Client}/>
-      <Route path="/container" component={Container}/>
+      <Route path="/ttn" component={TTN}/>
     </Router>
   );
 }

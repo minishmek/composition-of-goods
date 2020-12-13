@@ -9,14 +9,14 @@ function AllClient() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    service.getAll('clients', setClients, setError);
+    service.getAll('buyer', setClients, setError);
   }, [])
 
   const removeClient = (id) => {
-    axios.delete(`remove/clients/${id}`,).then(res => {
-      service.getAll('clients', setClients, setError);
+    axios.delete(`remove/buyer/${id}`,).then(res => {
+      service.getAll('buyer', setClients, setError);
     }).catch(e => {
-      console.log(setError(e.message))
+      setError(e.message)
     })
   }
 

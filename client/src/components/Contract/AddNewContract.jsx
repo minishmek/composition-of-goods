@@ -9,15 +9,13 @@ function AddNewContract() {
   const [form, setForm] = useState({})
   const [error, setError] = useState(null);
   const [showAddNewContract, setShowAddNewContract] = useState(false)
-  const [clients, setClients] = useState([])
-  const [products, setProducts] = useState([])
-  const [containers, setContainers] = useState([])
+  const [buyer, setBuyer] = useState([])
+  const [product, setProduct] = useState([])
 
 
   useEffect(() => {
-    services.getAll('clients', setClients, setError)
-    services.getAll('product', setProducts, setError)
-    services.getAll('containers', setContainers, setError)
+    services.getAll('buyer', setBuyer, setError)
+    services.getAll('product', setProduct, setError)
   }, [showAddNewContract])
 
   const history = useHistory()
@@ -25,9 +23,7 @@ function AddNewContract() {
   const AddNewContract = e => {
     e.preventDefault();
 
-    console.log(form)
     axios.post('add/contract', form).then(res => {
-      console.log(res);
       history.go(0);
     }).catch(e => {
       console.log(e.request)
@@ -56,45 +52,36 @@ function AddNewContract() {
       (
         <form className={styles.form} onSubmit={AddNewContract}>
           <button type="reset" onClick={handlerSetShowAddNewContract}>Сховати</button>
-          <label htmlFor="user">Клієнт</label>
-          <select name="user" id="user" value={form.user || ''} onChange={setFormField} required>
+          <label htmlFor="id_buyer">Клієнт</label>
+          <select name="id_buyer" id="id_buyer" value={form.id_buyer || ''} onChange={setFormField} required>
             <option value="">Виберіть клієнта</option>
             {
-              clients.map(client => {
+              buyer.length ?
+              buyer.map(b => {
                 return (
-                  <option key={client.id} value={client.id}>{client.name} {client.lastName}</option>
+                  <option key={b.id} value={b.id}>{b.name} {b.lastName}</option>
                 )
-              })
+              }) : ''
             }
           </select>
-          <label htmlFor="dataOfAssebly">Дата складання договору</label>
-          <input type="date" placeholder="Дата складання договору" id="dataOfAssebly" value={form.dataOfAssebly || ''}
+          <label htmlFor="cont_date">Дата складання договору</label>
+          <input type="date" placeholder="Дата складання договору" id="cont_date" value={form.cont_date || ''}
                  onChange={setFormField} required/>
-          <label htmlFor="user">Тип продукту</label>
-          <select name="typeOfProduct" id="typeOfProduct" value={form.typeOfProduct || ''} onChange={setFormField} required>
+          <label htmlFor="product">Товар</label>
+          <select name="product" id="product" value={form.product || ''} onChange={setFormField} required>
             <option value="">Виберіть продукт</option>
             {
-              products.map(product => {
-                return (
-                  <option key={product.id} value={product.id}>{product.name}</option>
-                )
-              })
+              product.length ?
+                product.map(p => {
+                  return (
+                    <option key={p.id} value={p.id}>{p.name}</option>
+                  )
+                }) : ''
             }
           </select>
-          <label htmlFor="countOfProduct">Кількість продуктів</label>
-          <input type="number" placeholder="Кількість продуктів" id="countOfProduct" value={form.countOfProduct || ''}
+          <label htmlFor="count">Кількість</label>
+          <input type="number" placeholder="Кількість" id="count" value={form.count || ''}
                  onChange={setFormField} required/>
-          <label htmlFor="container">Тара</label>
-          <select name="container" id="container" value={form.container || ''} onChange={setFormField} required>
-            <option value="">Виберіть тару</option>
-            {
-              containers.map(container => {
-                return (
-                  <option key={container.id} value={container.id}>{container.name}</option>
-                )
-              })
-            }
-          </select>
           <button type="submit">Додати</button>
         </form>
       )
