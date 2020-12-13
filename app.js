@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {mysqlConfig, secretKey} = require('./config');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 
 const app = express();
@@ -24,7 +25,7 @@ function start() {
       console.log(err.code)
     } else {
       console.log('DataBase OK!')
-      app.listen(PORT, 'localhost', () => {
+      app.listen(PORT,() => {
         console.log('connect')
       });
     }
@@ -160,7 +161,7 @@ function start() {
 
 start();
 
-if ((process.env.NODE_ENV = "production")) {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"))
 
   app.get("*", (req, res) => {
