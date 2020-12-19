@@ -5,7 +5,6 @@ const {mysqlConfig, secretKey} = require('./config');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 
-
 const app = express();
 app.use(bodyParser.json())
 app.use((req, res, next) => {

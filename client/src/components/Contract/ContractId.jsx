@@ -44,26 +44,30 @@ const Contract = ({match}) => {
                     <p><span>Кількість: </span>{contract.count}</p>
                 </div>
 
-                <h3>Товарні накладні</h3>
+                {
+                    ttn.length ? <div>
+                        <h3>Товарні накладні</h3>
 
-                <table style={{margin: '0 auto'}}>
-                    <thead>
-                    <tr>
-                        <th style={{paddingBottom: 10}}>Кількість на відправлення</th>
-                        <th>Дата відправлення</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        ttn.length && ttn.map(t => (
-                            <tr key={t.id}>
-                                <td style={{paddingBottom: 10}}>{t.count}</td>
-                                <td style={{paddingBottom: 10}}>{Moment(t.date).format('DD-MM-YYYY')}</td>
+                        <table style={{margin: '0 auto'}}>
+                            <thead>
+                            <tr>
+                                <th style={{paddingBottom: 10}}>Кількість на відправлення</th>
+                                <th>Дата відправлення</th>
                             </tr>
-                        ))
-                    }
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                            {
+                                ttn.map(t => (
+                                    <tr key={t.id}>
+                                        <td style={{paddingBottom: 10}}>{t.count}</td>
+                                        <td style={{paddingBottom: 10}}>{Moment(t.date).format('DD-MM-YYYY')}</td>
+                                    </tr>
+                                ))
+                            }
+                            </tbody>
+                        </table>
+                    </div> : <h3>Немає товарних накладних</h3>
+                }
             </div>
             <ReactToPdf targetRef={ref} filename="contract.pdf">
                 {({toPdf}) => (
