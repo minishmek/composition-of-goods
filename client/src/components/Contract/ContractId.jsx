@@ -28,8 +28,11 @@ const Contract = ({match}) => {
         }).catch(e => {
             setError(e.message || 'Сталася помилка спробуйте пізніше');
         });
-        console.log(ttn)
-    }, [match.params.id])
+    }, [history, match.params.id])
+
+    if (error) {
+        return (<h1 className='error'>Сталася помилка</h1>)
+    }
 
     return (
         <React.Fragment>
@@ -52,7 +55,7 @@ const Contract = ({match}) => {
                             <thead>
                             <tr>
                                 <th style={{paddingBottom: 10}}>Кількість на відправлення</th>
-                                <th>Дата відправлення</th>
+                                <th style={{paddingBottom: 10}}>Дата відправлення</th>
                             </tr>
                             </thead>
                             <tbody>
