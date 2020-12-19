@@ -22,7 +22,8 @@ const Register = () => {
     const Register = e => {
         e.preventDefault();
         axios.post('auth/signup', form).then(res => {
-            history.go('/login')
+            localStorage.setItem('login', JSON.stringify(res.data));
+            history.go('/')
         }).catch(e => {
             console.log(e)
         });

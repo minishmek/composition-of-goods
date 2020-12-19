@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {NavLink} from "react-router-dom";
 import Moment from 'moment'
 import styles from "./Contract.module.scss";
 import services from '../../services'
@@ -27,7 +28,7 @@ function AllContract() {
             contracts.length ?
             contracts.map(contract => {
               return (<li key={contract.id}>
-                <span>{contract.id}</span>
+                <span><NavLink to={`contract/${contract.id}`}>{contract.id}</NavLink></span>
                 <span>{contract.buyer} {contract.buyerLastName}</span>
                 <span>{Moment(contract.cont_date).format('DD-MM-YYYY')}</span>
                 <span>{contract.product}</span>
