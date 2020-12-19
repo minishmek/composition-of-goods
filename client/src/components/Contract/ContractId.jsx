@@ -22,12 +22,12 @@ const Contract = ({match}) => {
         }).catch(e => {
             setError(e.message || 'Сталася помилка спробуйте пізніше');
         });
-        axios.get(`get/ttn/${match.params.id}`).then(res => {
-            console.log(res)
-            setTtn(res.data || []);
-        }).catch(e => {
-            setError(e.message || 'Сталася помилка спробуйте пізніше');
-        });
+        // axios.get(`get/ttn/${match.params.id}`).then(res => {
+        //     console.log(res)
+        //     setTtn(res.data || []);
+        // }).catch(e => {
+        //     setError(e.message || 'Сталася помилка спробуйте пізніше');
+        // });
     }, [history, match.params.id])
 
     if (error) {
@@ -72,17 +72,17 @@ const Contract = ({match}) => {
                     </div> : <h3>Немає товарних накладних</h3>
                 }
             </div>
-            <ReactToPdf targetRef={ref} filename="contract.pdf">
-                {({toPdf}) => (
-                    <button
-                        style={{margin: "auto", display: "block"}}
-                        type={"link"}
-                        onClick={toPdf}
-                    >
-                        Завантажити в pdf
-                    </button>
-                )}
-            </ReactToPdf>
+            {/*<ReactToPdf targetRef={ref} filename="contract.pdf">*/}
+            {/*    {({toPdf}) => (*/}
+            {/*        <button*/}
+            {/*            style={{margin: "auto", display: "block"}}*/}
+            {/*            type={"link"}*/}
+            {/*            onClick={toPdf}*/}
+            {/*        >*/}
+            {/*            Завантажити в pdf*/}
+            {/*        </button>*/}
+            {/*    )}*/}
+            {/*</ReactToPdf>*/}
         </React.Fragment>
     )
 }
